@@ -2,6 +2,8 @@
 
 namespace Database\Seeders;
 
+use App\Models\Link;
+use App\Models\LinkItem;
 use App\Models\Todo;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -16,5 +18,6 @@ class DatabaseSeeder extends Seeder
     {
         User::factory(10)->create();
         Todo::factory(10)->create();
+        Link::factory(10)->has(LinkItem::factory()->count(5))->create();
     }
 }

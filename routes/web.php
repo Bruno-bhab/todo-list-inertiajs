@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\LinkController;
 use App\Http\Controllers\TodoController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -18,6 +19,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::put('/todo/{todo}', [TodoController::class, 'update'])->name('todo.update');
     Route::delete('/todo/{todo}', [TodoController::class, 'destroy'])->name('todo.destroy');
 });
+
+
+Route::get('/link/{link_name}', [LinkController::class, 'loadLinkPage'])->name('link');
 
 require __DIR__.'/settings.php';
 require __DIR__.'/auth.php';

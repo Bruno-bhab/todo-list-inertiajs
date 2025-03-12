@@ -60,7 +60,7 @@
                                 <Button variant="default" class="bg-green-400" v-else @click="() => handleCompleteTodo(item.id, !item.completed)">
                                     <Check class="w-1 h-1" />
                                 </Button>
-                                <Button variant="destructive" class="ml-2" @click="() => handleDeleteTodo(item.id, !item.completed)">
+                                <Button variant="destructive" class="ml-2" @click="() => handleDeleteTodo(item.id)">
                                     <Trash class="w-1 h1" />
                                 </Button>
                             </TableCell>

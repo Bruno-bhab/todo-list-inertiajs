@@ -3,16 +3,22 @@
 namespace App\Http\Controllers;
 
 use App\Models\Todo;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Inertia\Inertia;
+use Inertia\Response;
 
 class TodoController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(): Response
     {
-        var_dump(Todo::all());
+        return Inertia::render('todo/list', [
+            'todos' => Auth::user()->todos,
+        ]);
     }
 
     /**
@@ -26,9 +32,19 @@ class TodoController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Request $request): RedirectResponse
     {
-        //
+        $validated = $request->validate([
+            'title' => 'required|string',
+            'description' => 'nullable|string'
+        ]);
+
+        Todo::create([
+            'title'=> $validated['title'],
+            'description'=> $validated['description'],
+            'user_id'=> Auth::user()->id,
+        ]);
+        return back();
     }
 
     /**
@@ -50,9 +66,14 @@ class TodoController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Todo $todo)
+    public function update(Request $request, Todo $todo): RedirectResponse
     {
-        //
+        $validated = $request->validate([
+            'completed' => 'required|boolean'
+        ]);
+
+        $todo->update(['completed' => $validated['completed']]);
+        return back();
     }
 
     /**
@@ -60,6 +81,7 @@ class TodoController extends Controller
      */
     public function destroy(Todo $todo)
     {
-        //
+        $todo->delete();
+        return back();
     }
 }

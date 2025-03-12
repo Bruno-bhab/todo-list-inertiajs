@@ -13,7 +13,13 @@ class LinkController extends Controller
      */
     public function index()
     {
-        //
+        $links = Link::select('id', 'title', 'link_name')
+            ->orderBy('created_at','desc')
+            ->where('user_id', auth()->user()->id)
+            ->get();
+        return Inertia::render('link/list', [
+            'links'=> $links,
+        ]);
     }
 
     /**

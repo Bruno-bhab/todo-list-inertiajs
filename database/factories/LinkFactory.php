@@ -22,7 +22,7 @@ class LinkFactory extends Factory
             "description" => $this->faker->text(200),
             "logo" => $this->faker->imageUrl(),
             "link_name" => $this->faker->userName(),
-            "user_id" => User::factory()->create(),
+            "user_id" => 1,
             "color" => $this->faker->hexColor(),
             "text_color" => $this->faker->hexColor()
         ];

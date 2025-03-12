@@ -109,6 +109,7 @@ interface PageProps {
 const { toast } = useToast();
 const page = usePage<PageProps>();
 
+const toastDuration = 1000
 const tableValues = ref<ITableValues[]>([]);
 const props = defineProps<{ todos: ITableValues[] }>();
 const successMessage = ref('');
@@ -149,13 +150,17 @@ const generateTodoList = () => {
 };
 
 const handleCompleteTodo = (id: number, completed: boolean) => {
+    const bgToastTodo = completed ? 'bg-green-500 text-white' : 'bg-zinc-500 text-white'
+
     router.put(
         route('todo.update', id),{completed},
         {
             onSuccess: () => {
                 tableValues.value = page.props.todos;
                 toast({
-                    description: 'Todo completed',
+                    description: 'Todo updated',
+                    duration: toastDuration,
+                    class: bgToastTodo
                 });
             },
             onError: (errors) => {
@@ -163,6 +168,7 @@ const handleCompleteTodo = (id: number, completed: boolean) => {
                 toast({
                     description: 'Erro ao realizar opção! Entre em contato com o suporte.',
                     variant: 'destructive',
+                    duration: toastDuration
                 });
             },
         },
@@ -176,7 +182,8 @@ const handleSaveTodo = () => {
                 isDialogOpen.value = false;
                 toast({
                     description: 'Todo created',
-                    class: 'bg-green-500 text-white',
+                    class: 'bg-blue-500 text-white',
+                    duration: toastDuration
                 });
             },
         onError: (errors) => {
@@ -184,6 +191,7 @@ const handleSaveTodo = () => {
             toast({
                 description: 'Erro ao realizar opção! Entre em contato com o suporte.',
                 variant: 'destructive',
+                duration: toastDuration
             });
         },
     })
@@ -197,6 +205,8 @@ const handleDeleteTodo = (id: number) => {
                 tableValues.value = page.props.todos;
                 toast({
                     description: 'Todo deleted',
+                    duration: toastDuration,
+                    class: 'bg-orange-300 text-black'
                 });
             },
             onError: (errors) => {
@@ -204,6 +214,7 @@ const handleDeleteTodo = (id: number) => {
                 toast({
                     description: 'Erro ao realizar opção! Entre em contato com o suporte.',
                     variant: 'destructive',
+                    duration: toastDuration
                 });
             },
         },

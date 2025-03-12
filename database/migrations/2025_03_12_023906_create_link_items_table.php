@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('url');
             $table->foreignId('link_id')->constrained('links')->onDelete('cascade');
+            $table->integer('order');
             $table->timestamps();
         });
     }

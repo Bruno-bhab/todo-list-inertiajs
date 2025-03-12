@@ -10,9 +10,11 @@
             <div class="flex items-start justify-center grid-cols-subgrid bg-zinc-800 rounded-lg p-8">
                 <LinkCard :link="linkInfo"/>
             </div>
+
+            <Button @click="handleSaveLink" class="col-span-3 mt-8">Salvar</Button>
         </div>
 
-        <Button @click="handleSaveLink">Salvar</Button>
+
     </AppLayout>
 </template>
 

@@ -21,6 +21,7 @@ class LinkItemFactory extends Factory
             'name' => $this->faker->sentence(3),
             'link_id' => Link::factory(),
             'url' => $this->faker->url(),
+            'order'=> $this->faker->numberBetween(1,10),
         ];
     }
 }

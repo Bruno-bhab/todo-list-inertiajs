@@ -29,14 +29,14 @@
 
 <script setup lang="ts">
 import { ILink } from '@/types/links';
-import { reactive } from 'vue';
+import { reactive, toRefs } from 'vue';
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Textarea } from '@/components/ui/textarea'
 import { Pen } from 'lucide-vue-next'
 
 const props = defineProps<{ link: ILink }>()
-const linkInfo = reactive(props.link)
+const linkInfo = reactive(toRefs(props.link));
 
 const handleSetLogo = () => {
     document.getElementById('logo')?.click()

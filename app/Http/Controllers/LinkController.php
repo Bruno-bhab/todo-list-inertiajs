@@ -51,7 +51,13 @@ class LinkController extends Controller
      */
     public function edit(Link $link)
     {
-        //
+        if ($link->user_id !== auth()->id()) {
+            abort(403, 'Você não tem permissão para editar este link.');
+        }
+
+        return Inertia::render('link/edit', [
+            'link' => $link,
+        ]);
     }
 
     /**
@@ -67,7 +73,8 @@ class LinkController extends Controller
      */
     public function destroy(Link $link)
     {
-        //
+        $link->delete();
+        return back()->with('success','Deleted');
     }
 
     public function loadLinkPage(string $link_name)

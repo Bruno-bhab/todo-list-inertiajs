@@ -27,6 +27,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::delete('/todo/{todo}', [TodoController::class, 'destroy'])->name('todo.destroy');
 
     Route::get('/link', [LinkController::class, 'index'])->name('link.index');
+    Route::get('/link/edit/{link}', [LinkController::class,'edit'])->name('link.edit');
+    Route::delete('/link/{link}', [LinkController::class, 'destroy'])->name('link.destroy');
 });
 
 

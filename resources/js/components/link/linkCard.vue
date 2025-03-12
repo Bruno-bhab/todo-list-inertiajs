@@ -1,28 +1,6 @@
 <script setup lang="ts">
+import { ILink } from '@/types/links';
 import { computed } from 'vue';
-
-interface ILinkItem {
-    id: number;
-    name: string;
-    url: string;
-    link_id: number;
-    created_at: string;
-    updated_at: string;
-}
-
-interface ILink {
-    id: number;
-    title: string;
-    description: string;
-    logo: string;
-    color: string;
-    text_color: string;
-    link_name: string;
-    user_id: number;
-    created_at: string;
-    updated_at: string;
-    link_items: ILinkItem[];
-}
 
 const props = defineProps<{ link: ILink }>()
 

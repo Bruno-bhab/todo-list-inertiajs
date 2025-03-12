@@ -28,7 +28,7 @@
                                 {{ link.title }}
                             </TableCell>
                             <TableCell class="text-right flex justify-end">
-                                <Button variant="outline">
+                                <Button variant="outline" @click="handleEditLink(link.id)">
                                     <Pen class="w-1 h-1" />
                                 </Button>
                                 <AppDialog @handle-click="handleDeleteLink" :dialog-info="generateDialogToDeleteLink(link.id)">
@@ -103,8 +103,12 @@ const generateDialogToDeleteLink = (id: number) => {
     }
 }
 
+const handleEditLink = (id: number) => {
+    router.get(route('link.edit', id));
+}
+
 const handleDeleteLink = (id: number) => {
-    const toastDuration = 5000
+    const toastDuration = 1000
 
     router.delete(
         route('link.destroy', id),
@@ -112,7 +116,7 @@ const handleDeleteLink = (id: number) => {
             onSuccess: () => {
                 linksList.value = page.props.links;
                 toast({
-                    description: 'Todo deleted',
+                    description: 'Link deleted',
                     duration: toastDuration,
                     class: 'bg-orange-300 text-black'
                 });
